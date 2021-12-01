@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>随机选座</title>
+    <style>
+        * {
+            /* 初始化,取消页面的内外边距 */
+            padding: 0;
+            margin: 0;
+        }
+        
+        body {
+            /* 弹性布局,让页面元素垂直+水平居中 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #efeeee;
+        }
+        
+        .container {
+            display: flex;
+            /* 让一行中的元素平均分配宽度 */
+            flex-direction: column;
+            align-items: center;
+            /* 自动换行 */
+            flex-wrap: wrap;
+            width: 700px;
+            height: 500px;
+        }
+        
+        input {
+            border: none;
+            width: 70%;
+            font-size: 22px;
+            padding: 10px;
+            margin-bottom: 32px;
+            border-radius: 16px;
+            background-color: transparent;
+            /* 效果 */
+            backdrop-filter: blur(3px);
+            border-left: 2px solid rgba(255, 255, 255, .3);
+            border-top: 2px solid rgba(255, 255, 255, .3);
+            box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+            /* text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5); */
+            font-family: "Berlin Sans FB";
+            color: blue;
+            box-shadow: 18px 18px 20px rgba(0, 0, 0, 0.2), -18px -18px 20px rgba(255, 255, 255, 1);
+            /* 过渡时间 ease-out 是指先快速 后慢速 */
+            transition: all 0.2s ease-out;
+        }
+        
+        button {
+            border: none;
+            width: 50%;
+            font-size: 22px;
+            padding: 10px;
+            margin-bottom: 32px;
+            border-radius: 16px;
+            background-color: transparent;
+            backdrop-filter: blur(3px);
+            box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+            font-family: "Berlin Sans FB";
+            color: #000;
+            box-shadow: 18px 18px 20px rgba(0, 0, 0, 0.2), -18px -18px 20px rgba(255, 255, 255, 1);
+            /* 过渡时间 ease-out 是指先快速 后慢速 */
+            transition: all 0.2s ease-out;
+        }
+        
+         ::placeholder {
+            color: blue;
+            opacity: 0.8;
+        }
+        
+        button:hover {
+            font-size: 22px;
+            width: 49%;
+            box-shadow: 0 0 0 rgba(0, 0, 0, 0.2), 0 0 0 rgba(255, 255, 255, 0.8), inset 18px 18px 30px rgba(0, 0, 0, 0.1), inset -18px -18px 30px rgba(255, 255, 255, 1);
+        }
+        
+        textarea {
+            resize: none;
+            border: none;
+            box-shadow: 18px 18px 20px rgba(0, 0, 0, 0.2);
+            overflow: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <input type="text" name="" id="num" placeholder="请输入座位范围:1~?">
+        <button>开始</button>
+        <textarea name="" id="text" cols="30" rows="20"></textarea>
+    </div>
+    <script>
+        var btn = document.getElementsByTagName('button')[0];
+        var num = document.getElementById('num');
+        var text = document.getElementById('text');
+        //数组指针
+        var index = 0;
+        var no = 0;
+        var result = [];
+        num.onfocus = function() {
+            text.value = '';
+        }
+        btn.onclick = function() {
+            // console.log(parseInt(num.value));
+            if (!parseInt(num.value) || parseInt(num.value) == 0) {
+                alert("输入的不是数字,输入有效数字!");
+            }
+            //取随机数数,并添加到数组,如果数组不包含,则输出
+
+            no = Math.round(Math.random() * num.value);
+
+            console.log(parseInt(num.value) + 1);
+
+            if (result.indexOf(no) === -1) {
+                result[index] = no;
+                index++;
+                //追加内容
+                text.value = text.value + index + ' ==> ' + no + '\n';
+            }
+            console.log(result);
+            if (result.length == (parseInt(num.value) + 1)) {
+                alert('所有结果抽完了~');
+            }
+
+        }
+    </script>
+</body>
+
+</html>
